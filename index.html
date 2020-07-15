@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="D:\js\jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="index.js"></script>
+    <script src="theaterSeats.js"></script>
+    <script src="tickets.js"></script>
+    <title>Ticekt booking system</title>
+</head>
+
+<body>
+    <nav>
+        <div>
+            <a onclick="showForm()">Pick your show</a>
+            <div class="indicator" id="formIndicator">&nbsp;</div>
+        </div>
+        <div>
+            <a>Select seat</a>
+            <div class="indicator" id="seatIndicator">&nbsp;</div>
+        </div>
+        <div>
+            <a onclick="showTickets()">Tickets</a>
+            <div class="indicator" id="ticketIndicator">&nbsp;</div>
+        </div>
+
+    </nav>
+
+
+    <div class="main">
+        <div id="pickShow" class="container">
+            <form id="pickShowForm" onsubmit="createseating(event)">
+                <div class="row">
+                    <div class="col-25"><label for="cityDropdown">city :</label></div>
+                    <div class="col-75">
+                        <select id="cityDropdown" name="city">
+                            <option value="">--- please select ---</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25"><label for="theaterDropdown">Theater :</label></div>
+                    <div class="col-75">
+                        <select id="theaterDropdown" name="theater" disabled>
+                            <option value="">--- please select ---</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25"><label for="movieDropdown">Movie :</label></div>
+                    <div class="col-75">
+                        <select id="movieDropdown" name="movie" disabled>
+                            <option value="">--- please select ---</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25"><label for="ticketsDropdown">Tickets :</label></div>
+                    <div class="col-75">
+                        <select id="ticketsDropdown" name="noOfTickets" disabled>
+                            <option value="">--- please select ---</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25"><label for="timingsDropdown">Show Time :</label></div>
+                    <div class="col-75">
+                        <select id="timingsDropdown" name="movieTime" disabled>
+                            <option value="">--- please select ---</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="submit" value="Next" id="submit" disabled>
+                </div>
+            </form>
+        </div>
+        <div id="selectSeat" hidden="true">
+            <div style="margin: 0% 15%;">
+                <table id="messagePanel" class="messagePanel"></table>
+                <button id="confirmBooking" class="confirmBooking" onclick="pushticketDataToServer()"
+                    disabled style="float: right;">confirm</button>
+            </div>
+            <div style="display: flex; flex-direction: column;float: left;">
+                <div><input type="checkbox" class="seat available" style="pointer-events:none" /> : available </div>
+                <div><input type="checkbox" class="seat blocked" /> : blocked </div>
+                <div><input type="checkbox" class="seat" checked style="pointer-events:none" /> : selected </div>
+            </div>
+        </div>
+        <div id="showTickets" hidden="true">
+            <div id="tickets">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

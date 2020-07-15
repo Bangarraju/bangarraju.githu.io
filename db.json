@@ -1,0 +1,147 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "name": "raju",
+      "bookingHistory": [
+        {
+          "seatNumbers": [
+            "C3",
+            "D4",
+            "E5"
+          ],
+          "ticketId": 1594712461705,
+          "theaterName": "imax",
+          "movieName": "Avengers",
+          "timing": "12:30PM",
+          "location": "Hyderabad"
+        },
+        {
+          "seatNumbers": [
+            "F3",
+            "F4"
+          ],
+          "ticketId": 1594721583275,
+          "theaterName": "NCS",
+          "movieName": "Black Panther",
+          "timing": "5:00 PM",
+          "location": "vizianagaram"
+        }
+      ]
+    }
+  ],
+  "theater": [
+    {
+      "id": 1,
+      "name": "Prasads imax",
+      "location": "Hyderabad",
+      "seats": "144",
+      "rows": "12",
+      "columns": "12",
+      "shows": [
+        {
+          "id": 1,
+          "name": "Avengers",
+          "timings": [
+            "10:30 AM",
+            "1:15 PM",
+            "4:30 PM"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "panda",
+          "timings": [
+            "10:00 AM",
+            "12:30 PM",
+            "5:00 PM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "imax",
+      "location": "Hyderabad",
+      "seats": "144",
+      "rows": "10",
+      "columns": "10",
+      "shows": [
+        {
+          "id": 1,
+          "name": "fast and furious",
+          "timings": [
+            "10:30 AM",
+            "1:15 PM",
+            "4:30 PM"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Avengers",
+          "timings": [
+            "10:00 AM",
+            "12:30 PM",
+            "5:00 PM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "SVS",
+      "location": "vizianagaram",
+      "seats": "144",
+      "rows": "7",
+      "columns": "7",
+      "shows": [
+        {
+          "id": 1,
+          "name": "Bahubali",
+          "timings": [
+            "10:30 AM",
+            "1:15 PM",
+            "4:30 PM"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Jumanji",
+          "timings": [
+            "10:00 AM",
+            "12:30 PM",
+            "5:00 PM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "NCS",
+      "location": "vizianagaram",
+      "seats": "144",
+      "rows": "15",
+      "columns": "15",
+      "shows": [
+        {
+          "id": 1,
+          "name": "Doctor starnge",
+          "timings": [
+            "10:30 AM",
+            "1:15 PM",
+            "4:30 PM"
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Black Panther",
+          "timings": [
+            "10:00 AM",
+            "12:30 PM",
+            "5:00 PM"
+          ]
+        }
+      ]
+    }
+  ]
+}
