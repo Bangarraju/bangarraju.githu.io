@@ -66,9 +66,12 @@ function setCityDropdown() {
 
 //get the movie name for the particular theater
 function getMoviesAtTheater(theaterName) {
-    let theaters = JSON.parse(localStorage.getItem('theaters'))
-    let theater = theaters.filter((theater) => theater.name == theaterName)
-    return theater[0].shows;
+    function movies(){
+        let theaters = JSON.parse(localStorage.getItem('theaters'))
+        let theater = theaters.filter((theater) => theater.name == theaterName)
+        return theater[0].shows;
+    }
+    return movies;
 }
 
 
@@ -98,7 +101,7 @@ function setTheaterDropdown(location, theaterDropdown) {
 //set movie names to corresponding dropdown
 function setMovieDropdown(theater, movieDropdown) {
     movieDropdown.disabled = false;
-    let movieData = getMoviesAtTheater(theater);
+    let movieData = getMoviesAtTheater(theater)();
     let movies = movieData.map((movie) => { return movie.name });
     setDataToDropdown(movieDropdown, movies);
 }
@@ -108,7 +111,7 @@ function setTimeDropdown(theater, movie, timeDropdown) {
     timeDropdown.disabled = false;
     //get available timings of the particular movie
     function getTimingsForShow(theater, movie) {
-        let shows = getMoviesAtTheater(theater);
+        let shows = getMoviesAtTheater(theater)();
         let show = shows.filter((show) => show.name == movie)
         return show[0].timings
     }
