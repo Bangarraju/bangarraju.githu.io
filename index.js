@@ -4,18 +4,18 @@ var userObject = {
     name: "raju",
     bookingHistory: [
         {
-            "ticketId":0,
+            "ticketId": 0,
             "theaterName": "",
             "movieName": "",
             "timing": "",
             "seatNumbers": [],
-            "location" : ""
+            "location": ""
         }
     ]
 }
 
 //change indicator color in nav bar
-function changeIndicatorcolor(id, color){
+function changeIndicatorcolor(id, color) {
     document.getElementById(id).style.background = color;
 }
 
@@ -66,14 +66,32 @@ function setCityDropdown() {
 
 //get the movie name for the particular theater
 function getMoviesAtTheater(theaterName) {
-    function movies(){
-        let theaters = JSON.parse(localStorage.getItem('theaters'))
+    let theaters = JSON.parse(localStorage.getItem('theaters'))
+    function movies() {
         let theater = theaters.filter((theater) => theater.name == theaterName)
         return theater[0].shows;
     }
     return movies;
 }
 
+//get the theater names for a particular location
+var getTheatersAtLocation = function (location) {
+    let theaters = JSON.parse(localStorage.getItem('theaters'))
+    function TheatersAtLocation() {
+        return theaters.filter((theater) => theater.location == location)
+    }
+    return TheatersAtLocation;
+}
+
+//get available timings of the particular movie
+var getTimingsForShow = function (theater, movie) {
+    let shows = getMoviesAtTheater(theater)();
+    function timingsForShow() {
+        let show = shows.filter((show) => show.name == movie)
+        return show[0].timings
+    }
+    return timingsForShow;
+}
 
 //set corresponding dropdown options to select dropdown
 function setDataToDropdown(select, data) {
@@ -88,12 +106,7 @@ function setDataToDropdown(select, data) {
 //set theater names to corresponding dropdown
 function setTheaterDropdown(location, theaterDropdown) {
     theaterDropdown.disabled = false;
-    //get the theater names for a particular location
-    function getTheatersAtLocation(location) {
-        let theaters = JSON.parse(localStorage.getItem('theaters'))
-        return theaters.filter((theater) => theater.location == location)
-    }
-    let theatersdata = getTheatersAtLocation(location);
+    let theatersdata = getTheatersAtLocation(location)();
     let theaters = theatersdata.map((theater) => { return theater.name });
     setDataToDropdown(theaterDropdown, theaters);
 }
@@ -109,18 +122,12 @@ function setMovieDropdown(theater, movieDropdown) {
 //set times of a movie to the corresponding dropdown
 function setTimeDropdown(theater, movie, timeDropdown) {
     timeDropdown.disabled = false;
-    //get available timings of the particular movie
-    function getTimingsForShow(theater, movie) {
-        let shows = getMoviesAtTheater(theater)();
-        let show = shows.filter((show) => show.name == movie)
-        return show[0].timings
-    }
-    let timings = getTimingsForShow(theater, movie)
-    setDataToDropdown(timeDropdown, timings)
+    let timings = getTimingsForShow(theater, movie)();
+    setDataToDropdown(timeDropdown, timings);
 }
 
 //render form fields function
-function showForm(){
+function showForm() {
 
     //rendering elements and hide other elements
     document.getElementById('pickShowForm').hidden = false;
@@ -128,15 +135,15 @@ function showForm(){
     document.getElementById('showTickets').hidden = true;
 
     //change the indicator color in navbar
-    changeIndicatorcolor('formIndicator','blue');
-    changeIndicatorcolor('seatIndicator','white');
-    changeIndicatorcolor('ticketIndicator','white');
+    changeIndicatorcolor('formIndicator', 'blue');
+    changeIndicatorcolor('seatIndicator', 'white');
+    changeIndicatorcolor('ticketIndicator', 'white');
 }
 
 
 window.onload = function () {
 
-    changeIndicatorcolor('formIndicator','blue'); //change indicator of the page
+    changeIndicatorcolor('formIndicator', 'blue'); //change indicator of the page
 
     setCityDropdown(); //funciton call for city dropdown
 
@@ -146,7 +153,7 @@ window.onload = function () {
     var movieSelect = document.getElementById('movieDropdown');
     var ticketSelect = document.getElementById('ticketsDropdown');
     var timeSelect = document.getElementById('timingsDropdown');
-    
+
     //when movie dropdown changedt their value
     citySelect.onchange = (event) => {
         //reset the all dropdown values
@@ -156,7 +163,7 @@ window.onload = function () {
         timeSelect.length = 1;
 
         if (event.target.selectedIndex < 1) return;
-        
+
         setTheaterDropdown(event.target.value, theaterSelect);
     }
     //when theater dropdown changed their value
@@ -182,11 +189,11 @@ window.onload = function () {
     }
 
     //enable and disable next button in form  =depends on dropdown selection 
-    $("select").on("change",function(){
-        if(citySelect.value !== '' && theaterSelect.value !== '' && movieSelect.value !== '' && ticketSelect.value !== '' && timeSelect.value !== '' ){
+    $("select").on("change", function () {
+        if (citySelect.value !== '' && theaterSelect.value !== '' && movieSelect.value !== '' && ticketSelect.value !== '' && timeSelect.value !== '') {
             document.getElementById('submit').removeAttribute('disabled');
-        }else {
-            document.getElementById('submit').setAttribute('disabled','');
+        } else {
+            document.getElementById('submit').setAttribute('disabled', '');
         }
     })
 
